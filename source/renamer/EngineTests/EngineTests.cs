@@ -79,6 +79,30 @@ namespace EngineTests
 		}
 
 		[Test]
+		public void ReplaceWildCardValueWithUCase()
+		{
+			string config = @"[
+			{
+				""Type"":""Replace"",
+				""What"":{
+					""Type"":""Literal"",
+					""Value"":""*""
+				},
+				""With"":{
+					""Type"":""Transform"",
+					""Value"":""ucase""
+				}
+			}]";
+
+			IList<RenameAction> actions = Parser.ParseJson(config);
+			Engine engine = new Engine(actions, true);
+			Assert.AreEqual("FOO.txt", engine.Rename(@"foo.txt").Item1);
+
+			engine.ConsiderExtension = true;
+			Assert.AreEqual("FOO.TXT", engine.Rename(@"foo.txt").Item1);
+		}
+
+		[Test]
 		public void ReplaceMultipleLiternalWithLiteral()
 		{
 			string config = @"[

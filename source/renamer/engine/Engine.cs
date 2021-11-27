@@ -91,7 +91,15 @@ namespace SByteStream.Renamer
 					{
 						throw new InvalidOperationException(string.Format("Invalid transform value: {0}", action.With.Value));
 					}
-					return filePath.Replace(action.What.Value, GetTransformedString(action.What.Value, action.With.Value));
+
+					string what = action.What.Value;
+
+					if (action.What.Value == "*")
+                    {
+						what = filePath;
+                    }
+
+					return filePath.Replace(what, GetTransformedString(what, action.With.Value));
 				}
 			}
 			else if (action.What.Type == WhatTypes.Positional)
