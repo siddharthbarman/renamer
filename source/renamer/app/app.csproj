@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AssemblyName>renamer</AssemblyName>
+    <RootNamespace>SByteStream.Renamer</RootNamespace>
+    <Description>File renaming utility</Description>
+    <Copyright>Siddharth Barman</Copyright>
+    <ApplicationIcon>rename.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="rename.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\engine\engine.csproj" />
+  </ItemGroup>
+
+</Project>

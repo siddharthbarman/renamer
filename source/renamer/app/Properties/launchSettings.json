@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "app": {
+      "commandName": "Project",
+      "commandLineArgs": "-r  -t -c D:\\Work\\Github\\Renamer\\source\\jsons\\sample1.json d:\\temp\\rtest\\*.*"
+    }
+  }
+}
