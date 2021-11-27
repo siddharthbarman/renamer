@@ -37,6 +37,7 @@ cd copy ..\help\readme.txt .\files\
 
 REM Build Source
 cd ..\source\renamer
+"%VS_PATH%\msbuild" /p:Configuration=%CONFIG%;Platform=%PLATFORM% /t:restore renamer.sln
 "%VS_PATH%\msbuild" /p:Configuration=%CONFIG%;Platform=%PLATFORM% renamer.sln
 
 copy app\bin\%CONFIG%\netcoreapp3.1\engine.dll ..\..\install\files
