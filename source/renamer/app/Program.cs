@@ -20,7 +20,7 @@ namespace app
 			");
 			Console.WriteLine("Rename files with ease!");
 			Console.WriteLine("Syntax:");
-			Console.WriteLine("renamer [-t] [-r] -c <config.json> <filepattern>");
+			Console.WriteLine("renamer [-t] [-r] [-e] -c <rules.json> <filepattern>");
 			Console.WriteLine("renamer -c trailing-spaces.json c:\\temp\\*.png");
 			Console.WriteLine("-t    : Optional, runs the utility in test mode. Files are not renamed. Its a good way to check the effectiveness of the renaming rules.");
 			Console.WriteLine("-r    : Optional. Use it to recursively rename files in subfolders.");
