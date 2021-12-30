@@ -34,6 +34,28 @@ namespace EngineTests
 		}
 
 		[Test]
+		public void ReplaceSingleLiternalWithLiteralCaseInsensitive()
+		{
+			string config = @"[
+			{
+				""Type"":""Replace"",
+				""What"":{
+					""Type"":""Literal"",
+					""Value"":""foo"",
+					""CompareType"": ""CaseInsensitive""
+				},
+				""With"":{
+					""Type"":""Literal"",
+					""Value"":""bar""
+				}
+			}]";
+
+			IList<RenameAction> actions = Parser.ParseJson(config);
+			Engine engine = new Engine(actions, true);
+			Assert.AreEqual("bar.txt", engine.Rename(@"FOO.txt").Item1);
+		}
+
+		[Test]
 		public void ReplaceSingleLiternalWithPositional()
 		{
 			string config = @"[
@@ -332,6 +354,48 @@ namespace EngineTests
 
 			engine.ConsiderExtension = true;
 			Assert.AreEqual("foo.txtoo", engine.Rename(@"foo.txt").Item1);
+		}
+
+		[Test]
+		public void ReplaceSpacesWithRTrim()
+		{
+			string config = @"[
+			{
+				""Type"":""Replace"",
+				""What"":{
+					""Type"":""Literal"",
+					""Value"":""*""
+				},
+				""With"":{
+					""Type"":""Transform"",
+					""Value"": ""rtrim""
+				}
+			}]";
+
+			IList<RenameAction> actions = Parser.ParseJson(config);
+			Engine engine = new Engine(actions, true);
+			Assert.AreEqual("foo.txt", engine.Rename(@"foo .txt").Item1);
+		}
+
+		[Test]
+		public void ReplaceSpacesWithLTrim()
+		{
+			string config = @"[
+			{
+				""Type"":""Replace"",
+				""What"":{
+					""Type"":""Literal"",
+					""Value"":""*""
+				},
+				""With"":{
+					""Type"":""Transform"",
+					""Value"": ""ltrim""
+				}
+			}]";
+
+			IList<RenameAction> actions = Parser.ParseJson(config);
+			Engine engine = new Engine(actions, true);
+			Assert.AreEqual("foo.txt", engine.Rename(@" foo.txt").Item1);
 		}
 	}
 }

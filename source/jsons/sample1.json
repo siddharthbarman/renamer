@@ -3,13 +3,14 @@
 		"Type":"Replace",
 		"What":{
 			"Type":"Literal",
-			"Value":" (Bchry-DCP) re-edits"
+			"Value":" (Bchry-DCP) re-edits",
+			"CompareType": "CaseInsensitive"
 		},
 		"With":{
 			"Type":"Literal",
 			"Value":""
 		}
-	},
+	},	
 	{
 		"Type":"Replace",
 		"What":{

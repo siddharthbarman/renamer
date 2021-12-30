@@ -59,6 +59,11 @@ namespace app
 
 			Engine engine = new Engine(Parser.ParseJson(File.ReadAllText(conf)), testMode, extension);
 			string directory = Path.GetDirectoryName(pattern);
+			if (string.IsNullOrEmpty(directory))
+            {
+				directory = Directory.GetCurrentDirectory();
+            }
+
 			string patternOnly = Path.GetFileName(pattern);
 
 			if (testMode)

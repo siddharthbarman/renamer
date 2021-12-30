@@ -2,11 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
 
 namespace SByteStream.Renamer
 {
-	public class Engine
+    public class Engine
 	{
 		public Engine(IEnumerable<RenameAction> actions, bool reportMode = false, bool considerExtension = false)
 		{
@@ -75,7 +74,9 @@ namespace SByteStream.Renamer
 			{
 				if (action.With.Type == WithTypes.Literal)
 				{
-					return filePath.Replace(action.What.Value, action.With.Value);
+					return filePath.Replace(action.What.Value, action.With.Value,
+						action.What.CompareType == ComparisonType.CaseInsensitive ? StringComparison.CurrentCultureIgnoreCase : StringComparison.CurrentCulture);
+
 				}
 				else if (action.With.Type == WithTypes.Positional)
 				{
@@ -87,7 +88,8 @@ namespace SByteStream.Renamer
 				}
 				else if (action.With.Type == WithTypes.Transform)
 				{
-					if (!IsValidTransform(action.With.Value))
+					TransformTypes transformType;
+					if (!IsValidTransform(action.With.Value, out transformType))
 					{
 						throw new InvalidOperationException(string.Format("Invalid transform value: {0}", action.With.Value));
 					}
@@ -99,7 +101,8 @@ namespace SByteStream.Renamer
 						what = filePath;
                     }
 
-					return filePath.Replace(what, GetTransformedString(what, action.With.Value));
+					return filePath.Replace(what, GetTransformedString(what, transformType),
+						action.What.CompareType == ComparisonType.CaseInsensitive ? StringComparison.CurrentCultureIgnoreCase : StringComparison.CurrentCulture);
 				}
 			}
 			else if (action.What.Type == WhatTypes.Positional)
@@ -123,11 +126,12 @@ namespace SByteStream.Renamer
 				}
 				else if (action.With.Type == WithTypes.Transform)
 				{
-					if (!IsValidTransform(action.With.Value))
+					TransformTypes transform;
+					if (!IsValidTransform(action.With.Value, out transform))
 					{
 						throw new InvalidOperationException(string.Format("Invalid transform value: {0}", action.With.Value));
 					}
-					return filePath.ReplacePositionally(action.What.Position.Start, action.What.Position.Length, s => GetTransformedString(s, action.With.Value));
+					return filePath.ReplacePositionally(action.What.Position.Start, action.What.Position.Length, s => GetTransformedString(s, transform));
 				}
 			}
 			return filePath;
@@ -179,30 +183,25 @@ namespace SByteStream.Renamer
 			}
 		}
 
-		public bool IsValidTransform(string transform)
+		public bool IsValidTransform(string transform, out TransformTypes transformType)
 		{
-			if (transform.Equals("ucase", StringComparison.CurrentCulture))
-				return true;
-			else if (transform.Equals("lcase", StringComparison.CurrentCulture))
-				return true;
-			else if (transform.Equals("scase", StringComparison.CurrentCulture))
-				return true;
-			else if (transform.Equals("tcase", StringComparison.CurrentCulture))
-				return true;
-			else
-				return false;
+			return Enum.TryParse(transform, out transformType);
 		}
 
-		public string GetTransformedString(string str, string transform)
+		public string GetTransformedString(string str, TransformTypes transform)
 		{
-			if (transform.Equals("ucase", StringComparison.CurrentCulture))
+			if (transform == TransformTypes.ucase)
 				return str.ToUpper();
-			else if (transform.Equals("lcase", StringComparison.CurrentCulture))
+			else if (transform == TransformTypes.lcase)
 				return str.ToLower();
-			else if (transform.Equals("scase", StringComparison.CurrentCulture))
+			else if (transform == TransformTypes.scase)
 				return str.ToSentenceCase();
-			else if (transform.Equals("tcase", StringComparison.CurrentCulture))
+			else if (transform == TransformTypes.tcase)
 				return str.ToTitleCase();
+			else if (transform == TransformTypes.ltrim)
+				return str.TrimStart();
+			else if (transform == TransformTypes.rtrim)
+				return str.TrimEnd();
 			else
 				return str;
 		}

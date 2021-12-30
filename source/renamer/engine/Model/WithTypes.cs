@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SByteStream.Renamer.Model
+﻿namespace SByteStream.Renamer.Model
 {
-	public enum WithTypes
+    public enum WithTypes
 	{
 		Literal,
 		Regex,

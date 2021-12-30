@@ -52,6 +52,7 @@ REM Start Building Setup
 cd ..\install\files
 zip ..\renamer.zip *.*
 cd ..\..\build
+dir ..\install\*.zip
 
 REM "renamer.zip has been created in <install> folder."
 

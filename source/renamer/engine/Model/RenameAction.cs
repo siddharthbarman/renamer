@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SByteStream.Renamer.Model
+﻿namespace SByteStream.Renamer.Model
 {
-	public class RenameAction
+    public class RenameAction
 	{
 		public ActionTypes Type { get; set; }
 		public What What { get; set; }
