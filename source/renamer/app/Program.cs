@@ -39,7 +39,7 @@ namespace app
 
 			CmdLine cmd = new CmdLine(args);
 			
-			string conf = cmd.GetFlagValue(FLAG_CONFIG);
+			string conf = cmd.GetFlagValue(FLAG_CONFIG, null);
 			if (conf == null)
 			{
 				Console.WriteLine("Configuration file not specified. Use the -c option.");
