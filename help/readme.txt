@@ -114,6 +114,10 @@ built in functions. This rule will convert the any filename to upper-case.
 Similarly, there is a function named 'lcase' which will convert the 
 filename to lower-case. Use the -e option to also convert the file extension.
 
+You also have the ltrim and rtrim functions which will remove all 
+leading or trailing whitespace characters respectively.
+
+
 Example 5:
 This example is similar to example 3. Here we are replacing a part 
 specified using positional information with a literal text.

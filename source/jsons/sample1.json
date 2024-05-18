@@ -87,16 +87,49 @@
 			"Type":"Literal",
 			"Value":""
 		}
-	},
-{
+	},	
+	{
 		"Type":"Replace",
 		"What":{
 			"Type":"Literal",
-			"Value":"Digital"
+			"Value":"(Gold Key)"
 		},
 		"With":{
 			"Type":"Literal",
 			"Value":""
 		}
-	}	
+	},
+	{
+		"Type":"Replace",
+		"What":{
+			"Type":"Literal",
+			"Value":"(Vigilante407-DCP)"
+		},
+		"With":{
+			"Type":"Literal",
+			"Value":""
+		}
+	},
+	{
+		"Type":"Replace",
+		"What":{
+			"Type":"Literal",
+			"Value":"_(digital-Empire)"
+		},
+		"With":{
+			"Type":"Literal",
+			"Value":""
+		}
+	},	
+	{
+		"Type":"Replace",
+		"What":{
+			"Type":"Literal",
+			"Value":"*"
+		},
+		"With":{
+			"Type":"Transform",
+			"Value":"rtrim"
+		}
+	}
 ]
