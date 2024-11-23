@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "engine": {
+      "commandName": "Project",
+      "commandLineArgs": "renamer -t -r -c comics-zlibs.json \"F:\\Comics (A-R)\\*.*\""
+    }
+  }
+}

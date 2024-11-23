@@ -2,7 +2,7 @@
   "profiles": {
     "app": {
       "commandName": "Project",
-      "commandLineArgs": "-r  -t -c D:\\Work\\Github\\Renamer\\source\\jsons\\sample1.json *.*"
+      "commandLineArgs": "-t -r -c \"E:\\Utilities\\Renamer\\comics-zlibs.json\" \"F:\\Comics (A-R)\\*.*\""
     }
   }
 }

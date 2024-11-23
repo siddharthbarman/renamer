@@ -25,6 +25,11 @@ namespace SByteStream.Renamer
 		public Tuple<string, EngineResult> Rename(string filePath)
 		{
 			string fileName =  ConsiderExtension ? Path.GetFileName(filePath) : Path.GetFileNameWithoutExtension(filePath);
+			if (string.IsNullOrEmpty(fileName))
+			{
+                return new Tuple<string, EngineResult>(fileName, EngineResult.NoChange);
+            }
+
 			string pathOnly = Path.GetDirectoryName(filePath);
 			string newName = fileName;
 
@@ -103,6 +108,7 @@ namespace SByteStream.Renamer
 
 					return filePath.Replace(what, GetTransformedString(what, transformType),
 						action.What.CompareType == ComparisonType.CaseInsensitive ? StringComparison.CurrentCultureIgnoreCase : StringComparison.CurrentCulture);
+					
 				}
 			}
 			else if (action.What.Type == WhatTypes.Positional)
